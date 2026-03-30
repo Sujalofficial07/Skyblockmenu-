@@ -1,0 +1,9 @@
+name: HypixelCore
+version: '${project.version}'
+main: com.sujal.hypixelcore.HypixelCore
+api-version: '1.21'
+commands:
+  menu:
+    description: Opens the Skyblock Menu
+    aliases: [sbmenu]
+    
