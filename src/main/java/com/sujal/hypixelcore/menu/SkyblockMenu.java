@@ -1,5 +1,6 @@
 package com.sujal.hypixelcore.menu;
 
+import com.sujal.hypixelcore.HypixelCore;
 import com.sujal.hypixelcore.data.PlayerData;
 import com.sujal.hypixelcore.data.PlayerManager;
 import net.kyori.adventure.text.Component;
@@ -14,7 +15,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.Plugin;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,35 +22,33 @@ import java.util.stream.Collectors;
 
 public class SkyblockMenu {
 
-    // Naya Method: Player ki hotbar mein permanently Nether Star lagane ke liye
-    public static void giveMenuStar(Player player, Plugin plugin) {
+    private static final NamespacedKey MENU_KEY = new NamespacedKey(HypixelCore.getInstance(), "sb_menu_star");
+
+    // Give Unbreakable Star
+    public static void giveMenuStar(Player player) {
         ItemStack star = new ItemStack(Material.NETHER_STAR);
         ItemMeta meta = star.getItemMeta();
         
         if (meta != null) {
             meta.displayName(Component.text("§aSkyBlock Menu §7(Right Click)").decoration(TextDecoration.ITALIC, false));
-            
-            // Yahan hum ek invisible tag laga rahe hain taaki isko normal Nether Star se alag pehchan sakein
-            NamespacedKey key = new NamespacedKey(plugin, "skyblock_menu_star");
-            meta.getPersistentDataContainer().set(key, PersistentDataType.BYTE, (byte) 1);
-            
+            // Invisible custom tag for bulletproof security
+            meta.getPersistentDataContainer().set(MENU_KEY, PersistentDataType.BYTE, (byte) 1);
             meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             star.setItemMeta(meta);
         }
         
-        // 9th Slot (Index 8) mein item lock kar dena
+        // Forcefully set to slot 8 (9th slot in hotbar)
         player.getInventory().setItem(8, star);
     }
 
-    // Pehle wala openMenu function (Pura Waisa hi)
     public static void openMenu(Player player) {
         Inventory inv = Bukkit.createInventory(null, 54, Component.text("SkyBlock Menu", NamedTextColor.DARK_GRAY));
-
+        
+        // Background setup
         ItemStack bg = createItem(Material.BLACK_STAINED_GLASS_PANE, " ", null);
-        for (int i = 0; i < 54; i++) {
-            inv.setItem(i, bg);
-        }
+        for (int i = 0; i < 54; i++) inv.setItem(i, bg);
 
+        // Core Layout
         inv.setItem(13, createItem(Material.DIAMOND_SWORD, "§aYour Skills", Arrays.asList("§7View your skill progression and", "§7rewards.", "", "§eClick to view!")));
         inv.setItem(19, createItem(Material.PAINTING, "§aCollections", Arrays.asList("§7View all of the items available", "§7in SkyBlock.", "", "§eClick to view!")));
         inv.setItem(20, createItem(Material.BOOK, "§aRecipe Book", Arrays.asList("§7Through your adventure, you will", "§7unlock recipes.", "", "§eClick to view!")));
@@ -64,17 +62,19 @@ public class SkyblockMenu {
         inv.setItem(32, createItem(Material.MAP, "§aFast Travel", Arrays.asList("§7Teleport to specific locations", "§7around SkyBlock.", "", "§eClick to view!")));
         inv.setItem(48, createItem(Material.NAME_TAG, "§aProfile Management", Arrays.asList("§7Manage your SkyBlock profiles.", "", "§eClick to view!")));
         
-        // Dynamic Player Stats
+        // Deep Stats Integration
         PlayerData data = PlayerManager.getPlayerData(player);
-        int sbLevel = data != null ? data.getSkyblockLevel() : 0;
-        
+        int sbLevel = (data != null) ? data.getSkyblockLevel() : 0;
+        int health = 100 + (sbLevel * 5);
+        int strength = sbLevel / 5;
+
         List<String> statsLore = Arrays.asList(
             "§7View your active effects, core",
             "§7stats, and more.",
             "",
-            "§c❤ Health §f" + (100 + (sbLevel * 5)) + " HP",
+            "§c❤ Health §f" + health + " HP",
             "§a❈ Defense §f0",
-            "§c❁ Strength §f" + (sbLevel / 5),
+            "§c❁ Strength §f" + strength,
             "§f✦ Speed §f100",
             "§9☣ Crit Chance §f30%",
             "§9☠ Crit Damage §f50%",
@@ -98,7 +98,7 @@ public class SkyblockMenu {
                         .map(l -> Component.text(l).decoration(TextDecoration.ITALIC, false))
                         .collect(Collectors.toList()));
             }
-            meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+            meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_UNBREAKABLE);
             item.setItemMeta(meta);
         }
         return item;
