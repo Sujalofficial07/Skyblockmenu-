@@ -12,9 +12,9 @@
     <modules>
         <module>skyblock-utils</module>
         <module>skyblock-database</module>
-        <module>skyblock-menu</module>
         <module>skyblock-skills</module>
         <module>skyblock-collections</module>
+        <module>skyblock-menu</module>
         <module>skyblock-core</module>
     </modules>
 
