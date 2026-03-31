@@ -49,7 +49,7 @@ public class MainSkyBlockMenu extends SkyBlockMenu {
         NBTUtil.setString(menuManager.getPlugin(), skillsItem, "menu_type", "skills");
         setItem(10, skillsItem, event -> {
             Player p = (Player) event.getWhoClicked();
-            menuManager.openMenu(p, new com.skyblock.skills.SkillsMenu(menuManager));
+    //        menuManager.openMenu(p, new com.skyblock.skills.SkillsMenu(menuManager));
         });
 
         // ---- Collections Button (slot 11) ----
@@ -67,7 +67,7 @@ public class MainSkyBlockMenu extends SkyBlockMenu {
         NBTUtil.setString(menuManager.getPlugin(), collectionsItem, "menu_type", "collections");
         setItem(11, collectionsItem, event -> {
             Player p = (Player) event.getWhoClicked();
-            menuManager.openMenu(p, new com.skyblock.collections.CollectionsMenu(menuManager));
+     //       menuManager.openMenu(p, new com.skyblock.collections.CollectionsMenu(menuManager));
         });
 
         // ---- Profile Button (slot 13) ----
