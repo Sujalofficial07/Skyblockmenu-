@@ -1,14 +1,13 @@
 // Path: /skyblock-core/src/main/java/net/sujal/core/SkyblockPlugin.java
 package net.sujal.core;
 
+import net.sujal.api.profile.ProfileManager;
 import net.sujal.core.service.SkyblockServiceManager;
+import net.sujal.data.MongoConnection;
+import net.sujal.data.listener.ProfileListener;
+import net.sujal.data.profile.MongoProfileManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.logging.Level;
-
-/**
- * The main entry point for the Skyblock Core plugin.
- */
 public class SkyblockPlugin extends JavaPlugin {
 
     private static SkyblockPlugin instance;
@@ -19,21 +18,31 @@ public class SkyblockPlugin extends JavaPlugin {
         instance = this;
         this.serviceManager = new SkyblockServiceManager();
         
-        getLogger().info("Initializing Skyblock Core Framework...");
+        saveDefaultConfig();
+        
+        getLogger().info("Initializing Skyblock Framework...");
 
-        // TODO: Register Core Services here in subsequent steps
-        // e.g., serviceManager.registerService(ProfileManager.class, new MongoProfileManager(this));
+        // 1. Initialize Database
+        String uri = getConfig().getString("database.mongo-uri", "mongodb://localhost:27017");
+        String dbName = getConfig().getString("database.name", "skyblock");
+        MongoConnection mongoConnection = new MongoConnection(uri, dbName);
+        serviceManager.registerService(MongoConnection.class, mongoConnection);
 
-        getLogger().info("Skyblock Core Framework initialized successfully.");
+        // 2. Initialize Profile Manager
+        MongoProfileManager profileManager = new MongoProfileManager(mongoConnection);
+        serviceManager.registerService(ProfileManager.class, profileManager);
+
+        // 3. Register Listeners
+        getServer().getPluginManager().registerEvents(new ProfileListener(profileManager), this);
+
+        getLogger().info("Skyblock Framework initialized successfully.");
     }
 
     @Override
     public void onDisable() {
         if (this.serviceManager != null) {
-            getLogger().info("Shutting down services...");
             this.serviceManager.disableAll();
         }
-        getLogger().info("Skyblock Core Framework disabled.");
     }
 
     public static SkyblockPlugin getInstance() {
