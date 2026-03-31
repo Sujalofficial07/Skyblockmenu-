@@ -12,7 +12,8 @@ public enum Stat {
     FEROCITY("Ferocity", "⫽", 0.0),
     MINING_SPEED("Mining Speed", "⸕", 0.0),
     FARMING_FORTUNE("Farming Fortune", "☘", 0.0),
-    ABILITY_DAMAGE("Ability Damage", "๑", 0.0);
+    ABILITY_DAMAGE("Ability Damage", "๑", 0.0),
+    DAMAGE("Damage", "⚔", 0.0); // FIXED: Added base Weapon Damage stat
 
     private final String name;
     private final String symbol;
