@@ -1,0 +1,38 @@
+name: SkyBlock
+version: 1.0.0
+main: com.skyblock.core.SkyBlockPlugin
+api-version: '1.21'
+description: Hypixel SkyBlock Menu System Clone
+authors: [ SkyBlock Team ]
+website: https://github.com/skyblock/skyblock
+
+commands:
+  skyblock:
+    description: Opens the SkyBlock Menu
+    usage: /skyblock [menu|item|reload]
+    aliases: [ sb, sky ]
+    permission: skyblock.use
+  skills:
+    description: Opens the Skills menu
+    usage: /skills
+    aliases: [ skill ]
+    permission: skyblock.use
+  collections:
+    description: Opens the Collections menu
+    usage: /collections
+    aliases: [ collection, col ]
+    permission: skyblock.use
+
+permissions:
+  skyblock.use:
+    description: Allows using SkyBlock commands
+    default: true
+  skyblock.admin:
+    description: Allows using admin SkyBlock commands
+    default: op
+  skyblock.*:
+    description: All SkyBlock permissions
+    default: op
+    children:
+      skyblock.use: true
+      skyblock.admin: true
