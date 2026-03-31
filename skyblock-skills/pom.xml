@@ -24,9 +24,5 @@
             <groupId>com.skyblock</groupId>
             <artifactId>skyblock-database</artifactId>
         </dependency>
-   //     <dependency>
-   //         <groupId>com.skyblock</groupId>
-  //          <artifactId>skyblock-menu</artifactId>
-  //      </dependency>
     </dependencies>
 </project>
