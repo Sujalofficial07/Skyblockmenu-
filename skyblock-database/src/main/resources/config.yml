@@ -1,11 +1,11 @@
 # SkyBlock Database Module Configuration
 
 database:
-  host: paid2.skilloraclouds.site
+  host: localhost
   port: 3306
   name: Skyblock
-  username: u1208_8E6Db6pnxy
-  password: "gmNrPRZj2mJyii^sH7!e4@35"
+  username: yours
+  password: ""
   pool-size: 10
   connection-timeout: 30000
   idle-timeout: 600000
