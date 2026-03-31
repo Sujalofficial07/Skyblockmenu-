@@ -7,12 +7,17 @@ import com.skyblock.utils.ColorUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class SkyBlockCommand implements CommandExecutor {
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class SkyBlockCommand implements CommandExecutor, TabCompleter {
 
     private final Plugin plugin;
     private final MenuManager menuManager;
@@ -28,32 +33,67 @@ public class SkyBlockCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
                              @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(ColorUtil.color("&cOnly players can use this command."));
+            sender.sendMessage(ColorUtil.color(plugin.getConfig().getString(
+                "messages.player-only", "&cOnly players can use this.")));
             return true;
         }
-
-        if (args.length == 0) {
+        if (!player.hasPermission("skyblock.use")) {
+            player.sendMessage(ColorUtil.color(plugin.getConfig().getString(
+                "messages.no-permission", "&cNo permission.")));
+            return true;
+        }
+        if (args.length == 0 || args[0].equalsIgnoreCase("menu")) {
             menuManager.openMenu(player, new MainSkyBlockMenu(menuManager));
             return true;
         }
-
         switch (args[0].toLowerCase()) {
-            case "menu" -> menuManager.openMenu(player, new MainSkyBlockMenu(menuManager));
             case "item" -> {
-                ItemStack menuItem = menuItemBuilder.buildSkyBlockMenuItem();
-                player.getInventory().setItem(8, menuItem);
-                player.sendMessage(ColorUtil.color("&aGiven SkyBlock Menu item to your hotbar slot 9!"));
+                player.getInventory().setItem(8, menuItemBuilder.buildSkyBlockMenuItem());
+                player.sendMessage(ColorUtil.color(plugin.getConfig().getString(
+                    "messages.menu-item-given", "&aMenu item given!")));
             }
             case "reload" -> {
                 if (!player.hasPermission("skyblock.admin")) {
-                    player.sendMessage(ColorUtil.color("&cYou don't have permission to do that."));
+                    player.sendMessage(ColorUtil.color(plugin.getConfig().getString(
+                        "messages.no-permission", "&cNo permission.")));
                     return true;
                 }
                 plugin.reloadConfig();
-                player.sendMessage(ColorUtil.color("&aConfig reloaded!"));
+                player.sendMessage(ColorUtil.color(plugin.getConfig().getString(
+                    "messages.reload-success", "&aReloaded!")));
             }
-            default -> player.sendMessage(ColorUtil.color("&cUnknown subcommand. Use /skyblock, /skyblock item, or /skyblock reload"));
+            case "help" -> sendHelp(player);
+            default -> {
+                player.sendMessage(ColorUtil.color("&cUnknown subcommand. Use &e/skyblock help"));
+            }
         }
         return true;
+    }
+
+    private void sendHelp(Player player) {
+        player.sendMessage(ColorUtil.color("&6===== SkyBlock Help ====="));
+        player.sendMessage(ColorUtil.color("&e/skyblock &7- Opens SkyBlock menu"));
+        player.sendMessage(ColorUtil.color("&e/skyblock menu &7- Opens SkyBlock menu"));
+        player.sendMessage(ColorUtil.color("&e/skyblock item &7- Get the SkyBlock menu item"));
+        player.sendMessage(ColorUtil.color("&e/skills &7- Opens the Skills menu"));
+        player.sendMessage(ColorUtil.color("&e/collections &7- Opens the Collections menu"));
+        if (player.hasPermission("skyblock.admin")) {
+            player.sendMessage(ColorUtil.color("&e/skyblock reload &7- Reload config"));
+            player.sendMessage(ColorUtil.color("&e/sbadmin &7- Admin commands"));
+        }
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
+                                                 @NotNull String label, @NotNull String[] args) {
+        if (!(sender instanceof Player player)) return List.of();
+        if (args.length == 1) {
+            List<String> options = new java.util.ArrayList<>(Arrays.asList("menu", "item", "help"));
+            if (player.hasPermission("skyblock.admin")) options.add("reload");
+            return options.stream()
+                .filter(s -> s.startsWith(args[0].toLowerCase()))
+                .collect(Collectors.toList());
+        }
+        return List.of();
     }
 }
