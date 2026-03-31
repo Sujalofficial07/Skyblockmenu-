@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>skyblock-core</module>
         <module>skyblock-utils</module>
         <module>skyblock-database</module>
         <module>skyblock-menu</module>
