@@ -88,7 +88,7 @@ public class SkillXpListener implements Listener {
         COMBAT_XP.put(EntityType.MAGMA_CUBE, 2.0);
         COMBAT_XP.put(EntityType.SILVERFISH, 1.0);
         COMBAT_XP.put(EntityType.CAVE_SPIDER, 2.5);
-        COMBAT_XP.put(EntityType.PIG_ZOMBIE, 5.0);
+        COMBAT_XP.put(EntityType.ZOMBIFIED_PIGLIN, 5.0);
     }
 
     public SkillXpListener(SkillManager skillManager, Plugin plugin) {
