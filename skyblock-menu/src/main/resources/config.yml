@@ -1,0 +1,119 @@
+# SkyBlock Menu Module Configuration
+
+menu:
+  # Title of the main SkyBlock menu (supports & color codes)
+  main-title: "&0SkyBlock Menu"
+
+  # Size of the main menu inventory (must be multiple of 9, max 54)
+  main-size: 54
+
+  # Filler pane material for empty slots
+  # Options: BLACK_STAINED_GLASS_PANE, GRAY_STAINED_GLASS_PANE, etc.
+  filler-material: BLACK_STAINED_GLASS_PANE
+
+  # Slot positions for each main menu button (0-53)
+  slots:
+    skills: 10
+    collections: 11
+    profile: 13
+    trades: 14
+    pets: 15
+    accessory-bag: 28
+    crafting: 30
+    fast-travel: 31
+    wardrobe: 32
+    quests: 33
+    settings: 35
+    about: 4
+
+  # SkyBlock menu hotbar item
+  hotbar-item:
+    slot: 8
+    give-on-join: true
+    custom-model-data: 99999
+    name: "&aSkyBlock Menu &7(Right Click)"
+    lore:
+      - "&7Opens the SkyBlock menu"
+      - "&7to manage your profile,"
+      - "&7skills, collections, and more."
+      - ""
+      - "&eRight-click to open!"
+
+  # Button display names and lore
+  buttons:
+    skills:
+      name: "&aYour Skills"
+      lore:
+        - "&7View all of your SkyBlock"
+        - "&7skills and their levels."
+        - ""
+        - "&eClick to view!"
+    collections:
+      name: "&6Collections"
+      lore:
+        - "&7View all of your SkyBlock"
+        - "&7collections and their tiers."
+        - ""
+        - "&eClick to view!"
+    profile:
+      name: "&aYour SkyBlock Profile"
+      lore:
+        - "&7View your SkyBlock profile"
+        - "&7stats and information."
+        - ""
+        - "&eClick to view!"
+    trades:
+      name: "&aTrades"
+      lore:
+        - "&7Trade with other players"
+        - "&7or browse the Auction House."
+        - ""
+        - "&eClick to view!"
+    pets:
+      name: "&aPets"
+      lore:
+        - "&7Manage and view your"
+        - "&7collection of pets."
+        - ""
+        - "&eClick to view!"
+    fast-travel:
+      name: "&aFast Travel"
+      lore:
+        - "&7Quickly travel to important"
+        - "&7locations on your island."
+        - ""
+        - "&eClick to open!"
+    settings:
+      name: "&aSkyBlock Settings"
+      lore:
+        - "&7Customize your SkyBlock"
+        - "&7experience and preferences."
+        - ""
+        - "&eClick to open!"
+    accessory-bag:
+      name: "&5Accessory Bag"
+      lore:
+        - "&7Manage your talismans"
+        - "&7and accessories."
+        - ""
+        - "&eClick to open!"
+    crafting:
+      name: "&aCraft Item"
+      lore:
+        - "&7Open a crafting table."
+        - ""
+        - "&eClick to craft!"
+    wardrobe:
+      name: "&eWardrobe"
+      lore:
+        - "&7Switch between your"
+        - "&7armor sets quickly."
+        - ""
+        - "&eClick to open!"
+    quests:
+      name: "&eQuests"
+      lore:
+        - "&7View and track your"
+        - "&7active quests."
+        - ""
+        - "&eClick to open!"
