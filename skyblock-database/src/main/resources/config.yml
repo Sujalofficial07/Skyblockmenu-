@@ -1,0 +1,16 @@
+# SkyBlock Database Module Configuration
+
+database:
+  host: localhost
+  port: 3306
+  name: skyblock
+  username: root
+  password: ""
+  pool-size: 10
+  connection-timeout: 30000
+  idle-timeout: 600000
+  max-lifetime: 1800000
+  cache-prep-stmts: true
+  prep-stmt-cache-size: 250
+  prep-stmt-cache-sql-limit: 2048
+  use-server-prep-stmts: true
