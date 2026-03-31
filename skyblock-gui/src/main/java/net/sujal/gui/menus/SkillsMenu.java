@@ -33,33 +33,35 @@ public class SkillsMenu implements SkyblockMenu {
         // Fill background with glass panes
         ItemStack filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta fillerMeta = filler.getItemMeta();
-        fillerMeta.displayName(Component.text(" "));
-        filler.setItemMeta(fillerMeta);
+        if (fillerMeta != null) {
+            fillerMeta.displayName(Component.text(" "));
+            filler.setItemMeta(fillerMeta);
+        }
         for (int i = 0; i < 54; i++) {
             inventory.setItem(i, filler);
         }
 
-        // Setup Combat Skill Icon
-        double combatXp = ((net.sujal.data.profile.SkyblockProfileImpl) profile).getSkillXp(Skill.COMBAT);
+        // FIXED: Using the API method directly without importing the data implementation
+        double combatXp = profile.getSkillXp(Skill.COMBAT);
         int combatLevel = calculateLevel(combatXp);
         
         ItemStack combatIcon = new ItemStack(Material.STONE_SWORD);
         ItemMeta combatMeta = combatIcon.getItemMeta();
-        combatMeta.displayName(Component.text("Combat Skill", NamedTextColor.RED));
-        
-        List<Component> combatLore = new ArrayList<>();
-        combatLore.add(Component.text("Level: " + combatLevel, NamedTextColor.GRAY));
-        combatLore.add(Component.text("Total XP: " + String.format("%.1f", combatXp), NamedTextColor.GRAY));
-        combatLore.add(Component.empty());
-        combatLore.add(Component.text("Level Up Rewards:", NamedTextColor.GOLD));
-        combatLore.add(Component.text("+1% Crit Chance", NamedTextColor.GRAY));
-        combatMeta.lore(combatLore);
-        combatIcon.setItemMeta(combatMeta);
+        if (combatMeta != null) {
+            combatMeta.displayName(Component.text("Combat Skill", NamedTextColor.RED));
+            
+            List<Component> combatLore = new ArrayList<>();
+            combatLore.add(Component.text("Level: " + combatLevel, NamedTextColor.GRAY));
+            combatLore.add(Component.text("Total XP: " + String.format("%.1f", combatXp), NamedTextColor.GRAY));
+            combatLore.add(Component.empty());
+            combatLore.add(Component.text("Level Up Rewards:", NamedTextColor.GOLD));
+            combatLore.add(Component.text("+1% Crit Chance", NamedTextColor.GRAY));
+            combatMeta.lore(combatLore);
+            combatIcon.setItemMeta(combatMeta);
+        }
 
         // Place Combat icon in the middle of the chest
         inventory.setItem(20, combatIcon);
-        
-        // TODO: Add other icons like Farming (Material.GOLDEN_HOE) in slot 21, etc.
     }
 
     // Mathematical formula for level calculation (Similar to Hypixel)
