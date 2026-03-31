@@ -12,7 +12,6 @@
     <modules>
         <module>skyblock-utils</module>
         <module>skyblock-database</module>
-        <module>skyblock-menu</module>
     </modules>
 
     <properties>
