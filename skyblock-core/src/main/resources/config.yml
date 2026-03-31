@@ -1,0 +1,27 @@
+# SkyBlock Plugin Configuration
+
+database:
+  host: localhost
+  port: 3306
+  name: skyblock
+  username: root
+  password: ""
+  pool-size: 10
+
+# Resource pack configuration
+resourcepack:
+  enabled: false
+  url: ""
+  hash: ""
+  force: false
+
+# Settings
+settings:
+  # Give SkyBlock menu item on join
+  give-menu-item-on-join: true
+  # Slot for the SkyBlock menu item (0-8, default 8)
+  menu-item-slot: 8
+  # Show skill level up messages
+  skill-levelup-messages: true
+  # Show collection tier up messages
+  collection-tierup-messages: true
