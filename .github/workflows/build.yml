@@ -1,4 +1,4 @@
-name: Build SkyblockCore
+name: Skyblock Core Build
 
 on:
   push:
@@ -16,12 +16,12 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-    - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v3
-    - name: Build with Gradle
-      run: ./gradlew build
-    - name: Upload Artifact
+        cache: maven
+    - name: Build with Maven
+      run: mvn clean package -DskipTests
+    - name: Upload Core Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: SkyblockCore-Plugin
-        path: build/libs/*-all.jar
+        name: skyblock-core
+        path: skyblock-core/target/skyblock-core-*.jar
+        
