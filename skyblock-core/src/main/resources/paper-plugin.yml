@@ -1,0 +1,7 @@
+# Path: /skyblock-core/src/main/resources/paper-plugin.yml
+name: SkyblockCore
+version: '${project.version}'
+main: net.sujal.core.SkyblockPlugin
+api-version: '1.21'
+description: Base core system for the custom Skyblock network.
+authors: [Sujal]
