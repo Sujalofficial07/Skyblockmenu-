@@ -1,5 +1,8 @@
-# SkyBlock Plugin Configuration
+# ╔══════════════════════════════════════╗
+# ║     SkyBlock Core Configuration      ║
+# ╚══════════════════════════════════════╝
 
+# Database connection settings
 database:
   host: localhost
   port: 3306
@@ -7,21 +10,67 @@ database:
   username: root
   password: ""
   pool-size: 10
+  connection-timeout: 30000
+  idle-timeout: 600000
+  max-lifetime: 1800000
+  cache-prep-stmts: true
+  prep-stmt-cache-size: 250
+  prep-stmt-cache-sql-limit: 2048
+  use-server-prep-stmts: true
 
-# Resource pack configuration
+# Resource pack settings
 resourcepack:
   enabled: false
   url: ""
   hash: ""
   force: false
+  prompt: "&aPlease accept the SkyBlock resource pack!"
 
-# Settings
+# General settings
 settings:
   # Give SkyBlock menu item on join
   give-menu-item-on-join: true
-  # Slot for the SkyBlock menu item (0-8, default 8)
+
+  # Slot for the SkyBlock menu item in hotbar (0-8)
   menu-item-slot: 8
-  # Show skill level up messages
+
+  # Show skill level-up messages
   skill-levelup-messages: true
-  # Show collection tier up messages
+
+  # Show collection tier-up messages
   collection-tierup-messages: true
+
+  # XP multiplier applied to all skill XP gains
+  global-xp-multiplier: 1.0
+
+  # Collection amount multiplier
+  global-collection-multiplier: 1.0
+
+  # Whether to log database errors to console
+  debug-database: false
+
+  # Whether to send action bar updates for XP
+  actionbar-xp-updates: false
+
+# Menu settings
+menu:
+  main-title: "&0SkyBlock Menu"
+  filler-material: BLACK_STAINED_GLASS_PANE
+  hotbar-item-slot: 8
+  give-hotbar-item-on-join: true
+
+# Messages (supports & color codes)
+messages:
+  prefix: "&8[&aSkyBlock&8] "
+  no-permission: "&cYou don't have permission to do that."
+  player-only: "&cThis command can only be used by players."
+  player-not-found: "&cPlayer not found."
+  invalid-amount: "&cInvalid amount specified."
+  invalid-skill: "&cInvalid skill type specified."
+  invalid-collection: "&cInvalid collection type specified."
+  reload-success: "&aConfiguration reloaded successfully!"
+  skill-levelup: "&r &r&6&l  SKILL LEVEL UP &r&a{skill} &r&7{old} ➜ &r&a{new}"
+  collection-tierup: "&r &r&6&l  COLLECTION TIER UP &r&e{collection} &r&7Tier {old} ➜ &r&e{new}"
+  menu-item-given: "&aYour SkyBlock Menu item has been placed in hotbar slot 9!"
+  admin-givexp: "&aGave &e{amount} &a{skill} XP to &e{player}"
+  admin-addcollection: "&aAdded &e{amount} &a{collection} to &e{player}"
