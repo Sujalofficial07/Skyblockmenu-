@@ -9,24 +9,25 @@ public class StatsManager {
 
     public static void init(UUID uuid){
         stats.putIfAbsent(uuid,new HashMap<>());
-        set(uuid,"health",100);
-        set(uuid,"defense",0);
-        set(uuid,"strength",0);
-        set(uuid,"speed",100);
-        set(uuid,"crit_chance",30);
-        set(uuid,"crit_damage",50);
-        set(uuid,"intelligence",100);
+
+        set(uuid,"health",1719);
+        set(uuid,"defense",1208);
+        set(uuid,"strength",459);
+        set(uuid,"speed",155);
+        set(uuid,"crit_chance",118);
+        set(uuid,"crit_damage",483);
+        set(uuid,"intelligence",385);
+        set(uuid,"attack_speed",5);
+        set(uuid,"true_defense",6);
         set(uuid,"ferocity",0);
-        set(uuid,"attack_speed",0);
-        set(uuid,"true_defense",0);
 
-        set(uuid,"mining_speed",0);
-        set(uuid,"mining_fortune",0);
-        set(uuid,"farming_fortune",0);
-        set(uuid,"foraging_fortune",0);
+        set(uuid,"mining_speed",451);
+        set(uuid,"mining_fortune",253);
+        set(uuid,"farming_fortune",76);
+        set(uuid,"foraging_fortune",72);
 
-        set(uuid,"magic_find",0);
-        set(uuid,"pet_luck",0);
+        set(uuid,"magic_find",32);
+        set(uuid,"pet_luck",40);
         set(uuid,"fishing_speed",0);
     }
 
