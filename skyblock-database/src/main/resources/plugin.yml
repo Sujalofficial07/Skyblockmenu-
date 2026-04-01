@@ -1,7 +1,0 @@
-name: SkyBlockDatabase
-version: 1.0.0
-main: com.skyblock.database.SkyBlockDatabasePlugin
-api-version: '1.21'
-description: SkyBlock Database Module
-authors: [ SkyBlock Team ]
-depend: [ SkyBlockUtils ]
