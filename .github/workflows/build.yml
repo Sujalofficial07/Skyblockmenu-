@@ -23,5 +23,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: SkyBlockCore
-        path: target/skyblock-plugin-1.0-SNAPSHOT.jar
+        path: target/*.jar
         
