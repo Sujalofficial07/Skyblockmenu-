@@ -1,9 +1,0 @@
-name: SkyBlockCore
-version: 1.0
-main: com.skyblock.SkyBlockPlugin
-api-version: '1.21'
-commands:
-  sbmenu:
-    description: Opens the SkyBlock Menu
-    aliases: [menu]
-    
