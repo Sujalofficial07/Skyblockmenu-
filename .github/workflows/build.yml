@@ -1,45 +1,27 @@
-name: Build SkyBlock Plugin
+name: Java CI with Maven
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v3
+    - name: Set up JDK 21
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      run: mvn clean package
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SkyBlockCore
+        path: target/skyblock-plugin-1.0-SNAPSHOT.jar
         
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: 'maven'
-          
-      - name: Build with Maven
-        run: mvn clean package -B --no-transfer-progress
-        
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: skyblock-plugin
-          path: skyblock-core/target/skyblock-core-*.jar
-          retention-days: 30
-          
-      - name: Upload all module JARs
-        uses: actions/upload-artifact@v4
-        with:
-          name: skyblock-all-modules
-          path: |
-            skyblock-core/target/*.jar
-            skyblock-menu/target/*.jar
-            skyblock-skills/target/*.jar
-            skyblock-collections/target/*.jar
-            skyblock-database/target/*.jar
-            skyblock-utils/target/*.jar
-          retention-days: 7
