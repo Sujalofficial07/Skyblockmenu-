@@ -8,9 +8,9 @@ import org.bukkit.event.entity.EntityDeathEvent;
 public class EntityListener implements Listener {
 
     @EventHandler
-    public void onKill(EntityDeathEvent e) {
-        if (e.getEntity().getKiller() == null) return;
+    public void onKill(EntityDeathEvent e){
+        if(e.getEntity().getKiller()==null) return;
 
-        CollectionManager.add(e.getEntity().getKiller().getUniqueId(), "combat", 1);
+        CollectionManager.add(e.getEntity().getKiller().getUniqueId(),"combat",1);
     }
 }
