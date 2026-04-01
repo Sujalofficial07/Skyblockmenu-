@@ -1,6 +1,0 @@
-name: SkyBlockUtils
-version: 1.0.0
-main: com.skyblock.utils.SkyBlockUtilsPlugin
-api-version: '1.21'
-description: SkyBlock Utilities Module
-authors: [ SkyBlock Team ]
