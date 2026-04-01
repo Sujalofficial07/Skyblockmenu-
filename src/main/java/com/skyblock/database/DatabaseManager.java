@@ -12,9 +12,9 @@ public class DatabaseManager {
 
     public void init() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql://u1208_8E6Db6pnxy:gmNrPRZj2mJyii%5EsH7!e4%4035@paid2.skilloraclouds.site:3306/s1208_Skyblock");
-        config.setUsername("u1208_8E6Db6pnxy");
-        config.setPassword("gmNrPRZj2mJyii^sH7!e4@35");
+        config.setJdbcUrl("your");
+        config.setUsername("username");
+        config.setPassword("pass");
         config.setMaximumPoolSize(10);
 
         dataSource = new HikariDataSource(config);
