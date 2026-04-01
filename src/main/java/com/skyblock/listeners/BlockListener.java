@@ -11,19 +11,19 @@ import java.util.Set;
 
 public class BlockListener implements Listener {
 
-    private static final Set<String> placedBlocks = new HashSet<>();
+    private static final Set<String> placed = new HashSet<>();
 
     @EventHandler
-    public void onPlace(BlockPlaceEvent e) {
-        placedBlocks.add(e.getBlock().getLocation().toString());
+    public void place(BlockPlaceEvent e){
+        placed.add(e.getBlock().getLocation().toString());
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent e) {
+    public void breakBlock(BlockBreakEvent e){
         String loc = e.getBlock().getLocation().toString();
 
-        if (placedBlocks.contains(loc)) return;
+        if(placed.contains(loc)) return;
 
-        SkillManager.addXP(e.getPlayer().getUniqueId(), "mining", 10);
+        SkillManager.addXP(e.getPlayer().getUniqueId(),"mining",10);
     }
 }
