@@ -1,0 +1,7 @@
+name: SkyBlockPlugin
+main: com.skyblock.SkyBlockPlugin
+version: 1.0
+api-version: 1.21
+commands:
+  sbmenu:
+    description: Open SkyBlock Menu
